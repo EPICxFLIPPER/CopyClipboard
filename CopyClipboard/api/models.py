@@ -13,12 +13,24 @@ def generate_unique_code(length = 8):
 
 
 # Create your models here.
+#Data structrue represents a Room a user can join to share their clipboards
+#PRIMARY KEY code:             8 Character long uppercase code repreensting the room, eg AAAAAAAA
+#            active_user:      The username of the user whos clipboard is currently active in the room
+#            active_clipboard: The contents that can be copied from this room by users
+#            created _at:      The date and time this room was created at
 class Room(models.Model):
     code = models.CharField(max_length=8, default="", unique = True, null = False)
     active_user = models.CharField(max_length = 30, default = "", null = False)
     active_clipboard = models.TextField(max_length = 1000, default = "", null = False)
     created_at = models.DateTimeField(auto_now_add = True)
 
+
+#Data structrue represents a User with an active clipbaord that can join rooms
+#PRIMARY KEY user_name:   a users username, 30 characters long max, must be unique
+#            password:    a users password
+#FORIGN KEY  in_room:     the current room the user is in 
+#            clipboard:   The contents that the user is sharing to other users
+#            created _at: The date and time this user was created at
 class User(models.Model):
     user_name = models.CharField(max_length = 30, null = False, unique = True)
     password = models.CharField(max_length = 30, null = False)
