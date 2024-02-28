@@ -4,6 +4,6 @@ from .views import UserView
 
 
 urlpatterns = [
-    path('home', RoomView.as_view()),
+    path('room', RoomView.as_view()),
     path('user', UserView.as_view())
 ]
