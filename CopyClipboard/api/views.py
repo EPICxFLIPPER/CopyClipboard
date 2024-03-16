@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import RoomSerializer, CreateRoomSerializer
+from .serializers import RoomSerializer, CreateRoomSerializer, CreateUserSerializer
 from .serializers import UserSerializer
 from .models import Room
 from .models import User
@@ -18,6 +18,7 @@ class RoomView(generics.ListAPIView):
 class UserView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class CreateRoomView(APIView):
    serializer_class = CreateRoomSerializer
@@ -40,6 +41,34 @@ class CreateRoomView(APIView):
                 room = Room(host=host, name = name)
                 room.save()
                 return Response(RoomSerializer(room).data, status=status.HTTP_200_OK)
+            
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+   
+
+   
+class CreateUserView(APIView):
+   serializer_class = CreateUserSerializer
+
+   def post(self,request,format = None):
+        if (not self.request.session.exists(self.request.session.session_key)):
+           self.request.session.create()
+        
+        serializer = self.serializer_class(data = request.data)
+        if (serializer.is_valid()):
+            user_name = serializer.data.get('user_name')
+            password = serializer.data.get('password')
+            host = self.request.session.session_key
+            queryset = User.objects.filter(host = host)
+            if queryset.exists():
+                user = queryset[0]
+                user.user_name = user_name
+                user.password = password
+                user.save(update_fields=['user_name','password'])
+                return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+            else:
+                user = User(host=host, user_name = user_name, password = password)
+                user.save()
+                return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
             
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
         

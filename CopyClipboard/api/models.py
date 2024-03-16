@@ -37,6 +37,7 @@ class Room(models.Model):
 class User(models.Model):
     user_name = models.CharField(max_length = 30, null = False, unique = True)
     password = models.CharField(max_length = 30, null = False)
+    host = models.CharField(max_length = 50, unique = True)
     in_room = models.CharField(max_length = 8, default = "")
     clipboard = models.TextField(max_length = 1000, default = "", null = False)
     created_at = models.DateTimeField(auto_now_add = True)
