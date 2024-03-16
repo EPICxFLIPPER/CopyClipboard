@@ -8,7 +8,7 @@ from .models import User
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ('id','code','active_user','active_clipboard', 'created_at')
+        fields = ('id','code','name','active_user','active_clipboard', 'created_at')
 
 
 ##A serilizer for Users
@@ -16,3 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id','user_name','password','in_room','clipboard', 'created_at')
+
+class CreateRoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = ('name',)
