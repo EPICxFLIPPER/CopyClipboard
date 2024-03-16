@@ -17,11 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','user_name','password','host','in_room','clipboard', 'created_at')
 
+#Specifies what is needed to create rooms
 class CreateRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ('name',)
-
+#Specifies what is needed to create users
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

@@ -20,6 +20,12 @@ class UserView(generics.ListAPIView):
     serializer_class = UserSerializer
 
 
+#Effects: Allows us to view a page to create a room, since sessions can only host one room this is checked
+    # Creates a new session if one does not already exist
+    #     if the inputs are valid to create the room:
+    #       if a session already has a room it is updated
+    #       if a session does not have a room, the room is created
+    #Returns the room data as a response unless it failed in such case we return bad request
 class CreateRoomView(APIView):
    serializer_class = CreateRoomSerializer
 
@@ -45,7 +51,12 @@ class CreateRoomView(APIView):
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
    
 
-   
+#Effects: Allows us to view a page to create a user, since sessions can only host one user this is checked
+    # Creates a new session if one does not already exist
+    #     if the inputs are valid to create the user:
+    #       if a session already has a user it is updated
+    #       if a session does not have a user, the user is created
+    #Returns the user data as a response unless it failed in such case we return bad request
 class CreateUserView(APIView):
    serializer_class = CreateUserSerializer
 
