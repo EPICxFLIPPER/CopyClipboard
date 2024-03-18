@@ -14,8 +14,12 @@ import {Link} from "react-router-dom";
 export default class CreateRoomPage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            name: ""
+        };
     }
 
+    //Effects: Returns a rendering of the create room page
     render() {
         return <Grid container spacing={1}>
             <Grid item xs={12} align = "center">
