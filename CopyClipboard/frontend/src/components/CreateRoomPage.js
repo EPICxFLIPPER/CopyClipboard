@@ -17,6 +17,37 @@ export default class CreateRoomPage extends Component {
     }
 
     render() {
-        return <p>This is the create room page </p>; 
+        return <Grid container spacing={1}>
+            <Grid item xs={12} align = "center">
+                <Typography componenet='h4' variant ='h4'>
+                    Create A Room!
+                </Typography>
+            </Grid>
+            <Grid item xs={12} align = "center">
+                <FormControl>
+                    <TextField
+                     required={true}
+                     type = "string"
+                     defaultValue={"Name of the Room"}
+
+                    ></TextField>
+                    <FormHelperText>
+                        <div alighn="center">
+                            Name of the Room
+                        </div>
+                    </FormHelperText>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} align = "center">
+                <Button color = "primary" variant = "contained">
+                    Create Room
+                </Button>
+            </Grid>
+            <Grid item xs={12} align = "center">
+                <Button color = "secondary" variant = "contained" to="/" component={Link}>
+                    Back to Home
+                </Button>
+            </Grid>
+        </Grid>;
     }
 }
