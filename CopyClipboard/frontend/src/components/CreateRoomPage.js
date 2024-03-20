@@ -17,7 +17,21 @@ export default class CreateRoomPage extends Component {
         this.state = {
             name: ""
         };
+        this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
     }
+
+    handleNameChange(e) {
+        this.setState({
+            name: e.target.value
+        });
+    }
+
+    handleRoomButtonPressed() {
+        console.log(this.state);
+    }
+
+
 
     //Effects: Returns a rendering of the create room page
     render() {
@@ -33,17 +47,17 @@ export default class CreateRoomPage extends Component {
                      required={true}
                      type = "string"
                      defaultValue={"Name of the Room"}
-
+                     onChange={this.handleNameChange}
                     ></TextField>
                     <FormHelperText>
-                        <div alighn="center">
-                            Name of the Room
-                        </div>
+                        
+                        Name of the Room
+                        
                     </FormHelperText>
                 </FormControl>
             </Grid>
             <Grid item xs={12} align = "center">
-                <Button color = "primary" variant = "contained">
+                <Button color = "primary" variant = "contained" onClick={this.handleRoomButtonPressed}>
                     Create Room
                 </Button>
             </Grid>
